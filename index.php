@@ -25,7 +25,9 @@
                                 : $_SERVER['REQUEST_URL'] . '?path=' . $content . '/') . '">' . $content . '</a>'
                         : $content) 
                 . '</td>');
-            print('<td class="value"></td>');
+            print('<td class="value">
+            <button class="delete">Delete</button>
+            </td>');
             print('</tr>');
         }
     }
