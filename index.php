@@ -11,7 +11,6 @@
     <?php 
       $path = './' . $_GET["path"];
       $fileDir = scandir($path);
-      echo('<h2 class: "header">Directory:'.str_replace('?path=','',$_SERVER['REQUEST_URI']) .'</h2>');
       echo('<table class="row">
          <th class="field">Type</th>
          <th class="field">Name</th>
@@ -19,19 +18,28 @@
     foreach ($fileDir as $content){
         if ($content != ".." and $content != ".") {
             print('<tr>');
-            print('<td>' . (is_dir($path . $content) ? "Directory" : "File") . '</td>');
-            print('<td>' . (is_dir($path . $content) 
+            print('<td class="value">' . (is_dir($path . $content) ? "Directory" : "File") . '</td>');
+            print('<td class="value">' . (is_dir($path . $content) 
                         ? '<a href="' . (isset($_GET['path']) 
                                 ? $_SERVER['REQUEST_URL'] . $content . '/' 
                                 : $_SERVER['REQUEST_URL'] . '?path=' . $content . '/') . '">' . $content . '</a>'
                         : $content) 
                 . '</td>');
-            print('<td></td>');
+            print('<td class="value"></td>');
             print('</tr>');
         }
     }
     print("</table>");
+    
      ?>
+            <form  action="/SauliusBrowser" method="get"> 
+               <div class="create">
+                  <input class="input"  placeholder="Enter directory name" type="text" id="create_dir" name="create_dir">
+                  <button class="field" type="submit">Submit</button>
+              </div>
+                
+            </form>
+    
      </body>
 </html>
      

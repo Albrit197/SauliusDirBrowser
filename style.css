@@ -9,25 +9,33 @@ word-break: break-all;
 text-align: center;
 }
 
-
 .row {
-    background-color: rgb(236, 243, 211);
+    background-color: rgb(199, 240, 181);
     border-style: double;
     border-color: black;
     width: 70%;
     margin-top: 50px;
-    padding-left: 100px;
-    grid-row: 3px;
     
 }
 .field {
-    background-color: aliceblue;
+    background-color: rgb(233, 248, 209);
     text-align: center;
     color: black;
     font-size: large;
+   
 }
 .value {
     text-align: center;
     font-size: medium;
-    border-top: 3px;
+    border-style: groove;
+    border-color: aliceblue;
+}
+.create {
+    margin-top: 30px;
+    width: fit-content;
+    margin-left: 20px;
+}
+.input {
+  font-size: large;
+
 }
