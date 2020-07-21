@@ -11,7 +11,7 @@
     <?php 
       $path = './' . $_GET["path"];
       $fileDir = scandir($path);
-      echo('<h2>Directory:'.str_replace('?path=','',$_SERVER['REQUEST_URI']) .'</h2>');
+      echo('<h2 class: "header">Directory:'.str_replace('?path=','',$_SERVER['REQUEST_URI']) .'</h2>');
       echo('<table class="row">
          <th class="field">Type</th>
          <th class="field">Name</th>
