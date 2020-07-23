@@ -8,23 +8,24 @@
 </head>
 <body>
     <?php 
-            // FILE BROWSER
+                       // FILE BROWSER
       $path = './' . $_GET["path"];
       $fileDir = scandir($path);
       echo('<table class="row">
          <th class="field">Type</th>
          <th class="field">Name</th>
          <th class="field">Action</th>');
-      foreach ($fileDir as $content){
+       foreach ($fileDir as $content){
         if ($content != ".." and $content != ".") {
             print('<tr>');
             print('<td class="value">' . (is_dir($path . $content) ? "Directory" : "File") . '</td>');
-            print('<td class="value">' . (is_dir($path . $content) 
-                        ? '<a href="' . (isset($_GET['path']) 
-                                ? $_SERVER['REQUEST_URL'] . $content . '/' 
-                                : $_SERVER['REQUEST_URL'] . '?path=' . $content . '/') . '">' . $content . '</a>'
-                        : $content) 
+            print('<td class="value">' . (is_dir($path . $content)? 
+                  '<a href="' . (isset($_GET['path'])
+                  ? $content . '/' 
+                  : '?path=' . $content . '/') . '">' . $content . '</a>'
+                     : $content) 
                         . '</td>');
+                        
                         // DETELE FILE
             print('<td class="value">'. (is_dir($path . $content)? ''
                   : '<form style="display: inline-block" action="" method="post">
@@ -35,16 +36,26 @@
     }
     print("</table>");
         if(isset($_POST['delete'])){
-          $deleteFile = './' . $_GET["path"] . $_POST['delete'];
-          $deleteFileEscaped = str_replace("&nbsp;", " ", htmlentities($deleteFile, null, 'utf-8'));
-          if(is_file($deleteFileEscaped)){
-              if (file_exists($deleteFileEscaped)) {
-                  unlink($deleteFileEscaped);
-              }
+           $deleteFile = './'. $_GET["path"] . $_POST['delete'];
+           $fileEdit = str_replace("&nbsp;", " ", htmlentities($deleteFile, null, 'utf-8'));
+             if(is_file($fileEdit)){
+               if (file_exists($fileEdit)){
+                   unlink($fileEdit);
+             echo'<script>window.location.reload()</script>';
+            }
           }
-      }
-    
+       }   
      ?>
+
+                        <!-- GO BACK BUTTON -->
+     <?php $link_back = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+	          if (!empty($link_back)) {
+		           echo '<p><a class="back" href="'. $link_back .'" title="Return to the previous page">&laquo; Go back</a></p>';
+		        } else {
+		             echo '<p class="back"><a class="field" href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Go back</a></p>';
+	       }
+      ?>
+      
                        <!-- CREATE DIRECTORY -->
        <form  action="/SauliusBrowser" method="get"> 
           <div class="create">
@@ -54,24 +65,18 @@
          </div>         
       </form>
       <?php
-
-      if(isset($_GET["create_dir"])){
-        if($_GET["create_dir"] != ""){
-           $NewDir = './' . $_GET["path"] . $_GET["create_dir"];
-              if (!is_dir($NewDir)){
-                mkdir($NewDir, 0777, true);
-            }  
-            echo ('<script>window.onload = function() {
-                if(!window.location.hash) {
-                    window.location = window.location + "#loaded";
-                    window.location.reload();
-                 }
-            }</script>');
-            
-        }
-    }
+          if(isset($_GET["create_dir"])){
+            if($_GET["create_dir"] != ""){
+              $NewDir = './' . $_GET["path"] . $_GET["create_dir"];
+                  if (!is_dir($NewDir)){
+                    mkdir($NewDir, 0777, true);
+                    echo "<meta http-equiv='refresh' content='0'>";
+                }   
+              }
+            }
+        
       ?>
-    
+                      
      </body>
 </html>
      
