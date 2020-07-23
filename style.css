@@ -10,7 +10,7 @@ text-align: center;
 }
 
 .row {
-    background-color: rgb(199, 240, 181);
+    background-color: rgb(190, 243, 177);
     border-style: double;
     border-color: black;
     width: 70%;
@@ -31,7 +31,7 @@ text-align: center;
     border-color: aliceblue;
 }
 .create {
-    margin-top: 30px;
+    margin-top: 15px;
     width: fit-content;
     margin-left: 20px;
 }
@@ -42,9 +42,24 @@ text-align: center;
 .delete {
     font-size: medium;
     background-color:rgb(233, 248, 209) ;
+
 }
 .back {
     background-color: rgb(233, 248, 209);
     text-decoration: blue;
     text-decoration: solid;
+    margin-right: 90%;
+}
+.margin {
+    margin-top: 20px;
+}
+.out {
+    width: 15%;
+    margin-left: 56%;
+}
+.log_out {
+background-color:rgb(233, 248, 209) ;
+}
+.slide {
+    margin-right: 6.2%;
 }

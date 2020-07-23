@@ -7,7 +7,37 @@
     <title>File Browser</title>
 </head>
 <body>
+  
     <?php 
+      session_start();
+
+                       //Log_in/Log_out
+
+      $message = '';
+         if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {	
+           if ($_POST['username'] == 'Wellboy' && $_POST['password'] == 'koja') {
+              $_SESSION['logged_in'] = true;
+              $_SESSION['username'] = 'Wellboy';
+           } else {
+              $message = 'Wrong username or password';
+       }
+    }
+         if(!$_SESSION['logged_in'] == true){
+            print('<form class="row" action = "" method = "post">');
+            print('<h4>' . $message . '</h4>');
+            print('<input class="value slide" type = "text" name = "username" placeholder = "username = Wellboy" required autofocus></br>');
+            print('<input class="value" type = "password" name = "password" placeholder = "password = koja" required>');
+            print('<button class = "field" type = "submit" name = "login">Login</button>');
+            print('</form>');
+                die();
+            }
+            if(isset($_GET['action']) and $_GET['action'] == 'logout'){
+              session_start();
+              unset($_SESSION['username']);
+              unset($_SESSION['password']);
+              unset($_SESSION['logged_in']);
+        }
+        
                        // FILE BROWSER
       $path = './' . $_GET["path"];
       $fileDir = scandir($path);
@@ -30,7 +60,7 @@
             print('<td class="value">'. (is_dir($path . $content)? ''
                   : '<form style="display: inline-block" action="" method="post">
                         <input type="hidden" name="delete" value=' . str_replace(' ', '&nbsp;', $content) . '>
-                        <input type="submit" value="Delete"></form>'). "</td>");
+                        <input class="delete" type="submit" value="Delete"></form>'). "</td>");
             print('</tr>');
         }
     }
@@ -50,7 +80,7 @@
                         <!-- GO BACK BUTTON -->
      <?php $link_back = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
 	          if (!empty($link_back)) {
-		           echo '<p><a class="back" href="'. $link_back .'" title="Return to the previous page">&laquo; Go back</a></p>';
+		           echo '<p class="margin"><a class="back" href="'. $link_back .'" title="Return to the previous page">&laquo; Go back</a></p>';
 		        } else {
 		             echo '<p class="back"><a class="field" href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Go back</a></p>';
 	       }
@@ -64,6 +94,7 @@
             <button class="field" type="submit">Submit</button>
          </div>         
       </form>
+      <div class="out"> click here to <a class="log_out" href = "index.php?action=logout"> logout.</div>
       <?php
           if(isset($_GET["create_dir"])){
             if($_GET["create_dir"] != ""){
