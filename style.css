@@ -63,3 +63,8 @@ background-color:rgb(233, 248, 209) ;
 .slide {
     margin-right: 6.2%;
 }
+.login {
+    font-size: larger;
+    width: 65%;
+    margin-top: 50px;
+}

@@ -23,6 +23,7 @@
        }
     }
          if(!$_SESSION['logged_in'] == true){
+            print('<div class="login">Please login</div>');
             print('<form class="row" action = "" method = "post">');
             print('<h4>' . $message . '</h4>');
             print('<input class="value slide" type = "text" name = "username" placeholder = "username = Wellboy" required autofocus></br>');
@@ -36,6 +37,7 @@
               unset($_SESSION['username']);
               unset($_SESSION['password']);
               unset($_SESSION['logged_in']);
+              
         }
         
                        // FILE BROWSER
@@ -60,7 +62,12 @@
             print('<td class="value">'. (is_dir($path . $content)? ''
                   : '<form style="display: inline-block" action="" method="post">
                         <input type="hidden" name="delete" value=' . str_replace(' ', '&nbsp;', $content) . '>
-                        <input class="delete" type="submit" value="Delete"></form>'). "</td>");
+                        <input class="delete" type="submit" value="Delete">
+                        <form style="display: inline-block" action="" method="post">
+                                <input class="delete" type="hidden" name="download" value=' . str_replace(' ', '&nbsp;', $fnd) . '>
+                                <input class="delete" type="submit" value="Download">
+                        </form></td></form>'). "</td>");
+                        
             print('</tr>');
         }
     }
@@ -74,7 +81,26 @@
              echo'<script>window.location.reload()</script>';
             }
           }
-       }   
+       } 
+                     //  DOWNLOAD FILE
+       if(isset($_POST['download'])){
+         $file='./' . $_GET["path"] . $_POST['download'];
+         $fileToDownloadEscaped = str_replace("&nbsp;", " ", htmlentities($file, null, 'utf-8'));
+         ob_clean();
+         ob_start();
+         header('Content-Description: File Transfer');
+         header('Content-Type: application/pdf'); 
+         header('Content-Disposition: attachment; filename=' . basename($fileToDownloadEscaped));
+         header('Content-Transfer-Encoding: binary');
+         header('Expires: 0');
+         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+         header('Pragma: public');
+         header('Content-Length: ' . filesize($fileToDownloadEscaped)); 
+         ob_end_flush();
+         readfile($fileToDownloadEscaped);
+         exit;
+     }
+   
      ?>
 
                         <!-- GO BACK BUTTON -->
@@ -94,7 +120,7 @@
             <button class="field" type="submit">Submit</button>
          </div>         
       </form>
-      <div class="out"> click here to <a class="log_out" href = "index.php?action=logout"> logout.</div>
+      
       <?php
           if(isset($_GET["create_dir"])){
             if($_GET["create_dir"] != ""){
@@ -107,6 +133,7 @@
             }
         
       ?>
+      <div class="out"> click here to <a class="log_out" href = "index.php?action=logout"> logout.</div>
                       
      </body>
 </html>
