@@ -46,52 +46,6 @@
                }
             }
          }
-                           // Download file
-
-if (isset($_POST['download'])) {
-   print('Path to download: ' . str_replace('?path=/', '', $_SERVER['REQUEST_URI']) . $_POST['download'] . ' ----------> ' . "File has been successfully downloaded.");
-   $file = './' . $_GET["path"] . $_POST['download'];
-   $file_download = str_replace("&nbsp;", " ", htmlentities($file, null, 'utf-8'));
-
-   header('Content-Description: File Transfer');
-   header('Content-Type: application/pdf');
-   header('Content-Disposition: attachment; filename=' . basename($file_download));
-   header('Content-Transfer-Encoding: binary');
-   header('Expires: 0');
-   header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-   header('Pragma: public');
-   header('Content-Length: ' . filesize($file_download));
-
-   readfile($file_download);
-   exit;
-}
-
-                             //Upload file
-
-if (isset($_FILES['fileUpload'])) {
-   $errors = array();
-   $file_name = $_FILES['fileUpload']['name'];
-   $file_size = $_FILES['fileUpload']['size'];
-   $file_tmp = $_FILES['fileUpload']['tmp_name'];
-   $file_type = $_FILES['fileUpload']['type'];
-   $file_ext = strtolower(end(explode('.', $_FILES['fileUpload']['name'])));
-
-   $file_extension = array("txt");
-
-   if (in_array($file_ext, $file_extension) === false) {
-       $errors[] = "extension not allowed, please choose only .txt file.";
-   }
-
-   if ($file_size > 2097152) {
-       $errors[] = 'File size must be below 2 MB';
-   }
-
-   if (empty($errors) == true) {
-       move_uploaded_file($file_tmp, './' . $_GET["path"] . $file_name);
-   } else {
-       print_r($errors);
-   }
-}
 
       ?>
  <!DOCTYPE html>
@@ -146,7 +100,6 @@ if (isset($_FILES['fileUpload'])) {
     }
     print("</table>"); 
     ?> 
-
                                       
                                  <!-- Go back button -->
 
