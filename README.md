@@ -17,8 +17,7 @@ Browser features:
 - Browse directories
 - Create new directory
 - Delete files 
-- Download files
-- Upload files (.txt only)
+- Go back to the previous page
 
 Contributing
 Pull requests are welcome, but this project is for educational porpuses only. Thank you for your cooperation!
