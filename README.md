@@ -1,14 +1,27 @@
-Wellcome!
-This repository is file browsing page that contains:
-- Log in page
-- file browsing and navigation
-- create new folder function
-- delete existing files
-- go back button
-- log out function
-- download and upload functions is to be done....
+SauliusDirBrowser
 
-Thank you for your feedback
-Best regards,
+SauliusDirBrowser is a PHP Local Files browser project.
+
+Installation
+Use link: https://github.com/Albrit197/SauliusDirBrowser.git to clone or download repository using GIT. And open it with Visual Studio Code.
+install AMPPS program to your computer to be able to host this project.
+
+Usage
+
+When your AMPPS server is working properly and is ON, type in 'localhost' to your browser to get started.
+Click on SauliusBrowser/ directory to start navigating.
+
+Browser features:
+- Login
+- Logout
+- Browse directories
+- Create new directory
+- Delete files 
+- Download files
+- Upload files (.txt only)
+
+Contributing
+Pull requests are welcome, but this project is for educational porpuses only. Thank you for your cooperation!
+
+Author:
 Saulius
-
