@@ -47,8 +47,8 @@ text-align: center;
 .back {
     background-color: rgb(233, 248, 209);
     text-decoration: blue;
-    text-decoration: solid;
     margin-right: 90%;
+    margin-top: 20px;
 }
 .margin {
     margin-top: 20px;
